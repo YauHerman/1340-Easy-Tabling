@@ -7,7 +7,7 @@ This program automate the table management process effectively so that waiters c
 
 This is a group project for HKU 2018-2019 (Semester 2) ENGG1340, submitted by To Ming Lok (3035567590) and Yau Herman (3035570054).
 
-Program features
+## Features
 
 1) Make changes to the configuration of tables
 2) Reserve a table
