@@ -6,6 +6,10 @@
 #include <vector>
 using namespace std;
 
+//TODO Add order
+
+//TODO notify when occupy too long
+
 extern vector<Table> tables;
 
 #endif
