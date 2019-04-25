@@ -1,4 +1,5 @@
-using namespace std;
+#ifndef TABLE_H
+#define TABLE_H
 
 struct Table {
   int table_num;
@@ -8,3 +9,7 @@ struct Table {
   // add starting time here 
 
 };
+
+#endif
+
+
