@@ -8,7 +8,6 @@ struct table {
   int amount;
   // add starting time here 
   table *next;
-
 };
 
 #endif
