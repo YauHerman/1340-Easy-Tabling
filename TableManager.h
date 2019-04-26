@@ -7,12 +7,18 @@ using namespace std;
 
 vector<Table> tables;
 
+//search for a table given the table no.
+void searchtable(int table_no, table *head){
+  table *current = head;
+  while (current->next)  
+
 //TODO Change table configuration
-void change_table_config( string order, table *head, int target_table, int no_of_customers){
+void change_table_config( string order, table *&head, int target_table, int no_of_customers){
   // this first read an order ("add"-add a table , "delete"-delete a table, "change" - change no of customers)
   //this function then reads a pointer pointing to the head of linked list, table no. of targeted table and new no. of customers.
 if (order == "add"){
-  for (int i=0; i< target_table
+  current = 
+  
 }
 
 //TODO Reserve a table
