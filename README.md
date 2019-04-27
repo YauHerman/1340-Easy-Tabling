@@ -26,7 +26,7 @@ Our program takes 1 input only (config.txt), which stores the number of customer
  
 Information of every table such as total fee, current table status (A, R, O represent available, reserved, occupied respectively) are displayed in the main menu. Also, overtime notification (features 8) will only be issued every time main menu is visited.
 
-We want our program to be user-friendly, clear instructions are provided while running the program. An erroe message will pop out if users command is incorrect.
+We want our program to be user-friendly, clear instructions are provided while running the program. An erroe message will pop out if target is invalid.
 
 On the other hand, the program allows users to enter consecutive orders if they are used to. For example, users can enter 1+3 directly in the menu to occupy table 3 or enter the order 1 by 1 following instructions.
 
