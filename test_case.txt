@@ -1,1 +1,14 @@
+Input is italic.
+Output is bold.
+
+
+Test case 1
+
+**Table No. Capacity  Status    Total ($) Starting Time
+1         2         A         N/A       N/A
+2         1         R         N/A       N/A
+3         4         O         0         Sat Apr 27 22:53:32 2019
+4         5         A         N/A       N/A
+5         10        A         N/A       N/A**
+
 
