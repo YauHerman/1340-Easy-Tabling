@@ -34,4 +34,10 @@ On the other hand, the program allows users to enter consecutive orders if they 
 
 When users exit the program, final table configuration total amount of transaction of each table will be output to report.txt We hope this can assist owners in adding up profit.
 
+## Compilation Instruction
 
+To compile the program, clone the whole source code, use "make tabler" command at the root folder, the program "tabler.exe" will be generated.
+
+## Execution Instruction
+
+To execute the program, use "tabler" command at the root folder after compliation is done. On windows, you can double click "tabler.exe" to run execute it.
