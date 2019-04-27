@@ -8,15 +8,18 @@
 #include <chrono>
 using namespace std;
 
-//vector<Table> tables;
 
-//search for a table given a table no(key).
+//Search for a table given a table number.
+//Inputs: key - The table number.
+//        head - The address of the head of the list of tables.
+//Ouput: The table number if found, 0 if not found.
 int search_for_table(int key, table *head) {
+
   if (head == NULL) return 0;
   table *current = head;
   int n=1;
+
   while (current != NULL) {
-    // Idk is this while loop legal lol
     if (current -> table_no == key){
       return n;
     }
@@ -24,16 +27,23 @@ int search_for_table(int key, table *head) {
     n++;
   }
   return 0;
+
 }
 
-
-
-//TODO Change table configuration
+//Add a table to the linked list
+//Inputs: head - The address of the head of the list of tables.
+//        tail - The address of the tail of the list of tables.
+//        table_no - The ID of the table.
+//        no_of_cus - The capacity of the table.
 void addTable(table * & head, table * & tail, int table_no, int no_of_cus) {
+
+  //If a table with the same ID is present, give an error.
   if (search_for_table(table_no, head) != 0) {
-    cout << "Table exists" << endl;
+    cout << "[!] The same table already exists!" << endl;
     return;
   } else {
+
+    //Create the table, initialize it with default values.
     table *p = new table;
     p->table_no = table_no;
     p->no_of_cus = no_of_cus;
@@ -41,114 +51,132 @@ void addTable(table * & head, table * & tail, int table_no, int no_of_cus) {
     p->amount = 0;
     p->total_amount = 0;
     p->next = NULL;
-    // set time to null at this line
-    if (head == NULL) {
-      head = p;
-      tail = p;
-    } else {
-      tail->next = p;
-      tail = p;
-    }
+
+    //Add the table to the list
+    if (head == NULL) head = p;
+    else tail->next = p
+    tail = p;
+
   }
 }
 
-void deleteTable(table *head, int table_no, int no_of_cus) {
-  if(search_for_table(table_no, head)){
-    table *current = head;
-    while(current->next){
-      if (current ->next -> table_no == table_no){
-        table *p = current ->next;
-        current->next=current->next->next;
-        // how the delete data stored in p?
-        return;
-      }
-      current = current->next;
-    }
-    delete current;
-    return;
-    //in case targeted table is the last table
-  } else {
-    cout << "Table does no exist"<<endl;
-    return;
-  }
-}
-
+//Changes the capacity of the table.
+//Inputs: head - The address of the head of the list of tables.
+//        table_no - The ID of the table.
+//        no_of_cus - The capacity of the table.
 void changeTable(table *head, int table_no, int no_of_cus) {
+
+  //Search for the table, error if it does not exit.
   int i = search_for_table(table_no, head);
   table *current = head;
-  if(i){
-    for (int k=0;k<i;k++){
+  if(i) {
+
+    //Updates the capacity
+    for (int k=1;k<i;k++){
       current = current->next;
     }
     current->no_of_cus = no_of_cus;
-    return;
+
   } else {
-    cout << "Table does no exist"<<endl;
-    return;
+    cout << "[!] Table does not exist!"<<endl;
   }
 }
 
-void change_table_config(string order, table *head, int table_no, int no_of_cus) {
-  // this first read an order ("add"-add a table , "delete"-delete a table, "change" - change no of customers)
-  //this function then reads a pointer pointing to the head of linked list, table no. of targeted table and new no. of customers.
+//Reserves a table.
+//Inputs: head - The address of the head of the list of tables.
+//        target_table - The ID of the table.
+//Output: True if the table is successfully reserved, false otherwise.
+bool reserve_table (table *head, int target_table){
 
-}
-
-
-//TODO Reserve a table
-void reserve_table (table *head, int target_table){
+  //Search for the table, gives warning if it does not exist.
   int i = search_for_table(target_table, head);
   table*current = head;
   if(i) {
+
     for (int k=1;k<i;k++) {
       current = current->next;
+    }
+    //Only avaliable tables can be reserved.
+    if (current->status != 'A') {
+      cout << "[!] The table is not avaliable!" << endl;
+      return false;
     }
     current->status = 'R' ;
-    return;
+    return true;
+
   } else {
-    cout << "Table does no exist"<<endl;
-    return;
+    cout << "[!] Table does not exist!"<<endl;
+    return false;
   }
-  //this function then reads a pointer pointing to the head of linked list, table no. of targeted table
 
 }
-//TODO Occupy a table
-void occupy_table (table *head, int target_table) {
-  //this function then reads a pointer pointing to the head of linked list, table no. of targeted table,
+
+//Occupies a table.
+//Inputs: head - The address of the head of the list of tables.
+//        target_table - The ID of the table.
+//Output: True if the table is successfully occupied, false otherwise.
+bool occupy_table (table *head, int target_table) {
+
+  //Search for the table, gives warning if not found.
   int i = search_for_table(target_table, head);
   table*current = head;
   if(i) {
+
     for (int k=1;k<i;k++) {
       current = current->next;
     }
+    //Only reserved or avaliable tables can be occupied.
+    if (current->status == 'O') {
+      cout << "[!] The table is already occupied!" << endl;
+      return false;
+    }
+
+    //Update the status and mark down the time
     current->status = 'O' ;
     current->time = chrono::system_clock::now();
-    return;
+    return true;
+
   } else {
-    cout << "Table does no exist"<<endl;
-    return;
+
+    cout << "[!] Table does not exist!"<<endl;
+    return false;
+
   }
 }
 
-//TODO Release a table
+//Releases a table.
+//Inputs: head - The address of the head of the list of tables.
+//        target_table - The ID of the table.
+//Output: The order amount of the table, or -1 if failed to release the table.
 int release_table (table *head, int target_table) {
-  //this function then reads a pointer pointing to the head of linked list, table no. of targeted table
+
+  //Search for the table, gives a warning if not found.
   int i = search_for_table(target_table, head);
   table*current = head;
   if(i) {
+
     for (int k=1;k<i;k++) {
       current = current->next;
     }
+    //Only occupied tables can be released.
+    if (current->status != 'O') {
+      cout << "[!] The table is not occupied!" << endl;
+      return -1;
+    }
+
+    //Updates the status and resets the amount.
+    //Adds to the total amount.
     current->status = 'A' ;
     int n = current->amount;
     current->total_amount += n;
     current->amount = 0;
-    //reset amount to 0
     return n;
+
   } else {
-    cout << "Table does no exist"<<endl;
-    return 0;
+    cout << "[!] Table does not exist!"<<endl;
+    return -1;
   }
+  
 }
 
 #endif
