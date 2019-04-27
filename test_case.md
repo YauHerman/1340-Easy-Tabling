@@ -1,0 +1,33 @@
+## Test case 1 ##
+Input
+Console:
+1 * 2 1 + 3 1 + 4 1 - 4 1 / 5 10
+
+config.txt:
+Capacity (In the order of the table number) 
+2
+1 
+4 
+5 
+4
+
+
+Output
+Console:
+Table No. Capacity  Status    Total ($) Starting Time
+1         2         A         N/A       N/A
+2         1         R         N/A       N/A
+3         4         O         0         Sat Apr 27 22:53:32 2019
+4         5         A         N/A       N/A
+5         10        A         N/A       N/A
+
+Report.txt:
+Table No. Capacity Total ($) 
+1         2         0 
+2         1         0 
+3         4         0 
+4         5         0 
+5         10        0
+
+
+
