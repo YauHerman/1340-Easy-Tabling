@@ -10,6 +10,6 @@ using namespace std;
 
 //TODO Check the status of a table
 
-extern vector<Table> tables;
+//extern vector<Table> tables;
 
 #endif

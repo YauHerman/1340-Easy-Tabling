@@ -6,10 +6,8 @@ struct table {
   int no_of_cus;
   char status;
   int amount;
-  // add starting time here 
+  // add starting time here
   table *next;
 };
 
 #endif
-
-

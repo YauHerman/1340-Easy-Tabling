@@ -10,6 +10,6 @@ using namespace std;
 
 //TODO notify when occupy too long
 
-extern vector<Table> tables;
+//extern vector<Table> tables;
 
 #endif
